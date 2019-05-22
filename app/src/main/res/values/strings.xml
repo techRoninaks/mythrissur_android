@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Mythri</string>
+    <string name="app_logo_desc">MyThrissur Logo</string>
+    <string name="app_logo_text_desc">MyThrissur Text Logo</string>
 </resources>
