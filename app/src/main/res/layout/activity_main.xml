@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.MainActivity">
+
+    <WebView
+        android:id="@+id/webview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/windowBackground"
+        app:itemTextColor="@color/itemText"
+        app:itemBackground="@android:color/transparent"
+        app:itemIconTint="@drawable/tab_selector"
+        android:layout_alignParentBottom="true"
+        app:labelVisibilityMode="labeled"
+        app:itemTextAppearance="@style/TextStyleBNV"
+        app:menu="@menu/navigation" />
+    <ImageView
+        android:id="@+id/menuid"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/menu_25xhdpi_min"
+        android:layout_alignBottom="@id/navigation"
+        android:layout_alignEnd="@id/navigation"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:translationZ="10dp"
+        android:layout_marginEnd="35dp"
+        android:layout_marginBottom="17dp"/>
+
+
+
+
+</RelativeLayout>

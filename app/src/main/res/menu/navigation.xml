@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/home_unselected_15xhdpi_min"
+        android:title="@string/title_home"/>
+    <item
+        android:id="@+id/navigation_volunteer"
+        android:icon="@drawable/volunteer_20xhdpi_min"
+        android:title="@string/title_volunteer"/>
+
+    <item
+        android:id="@+id/navigation_donate"
+        android:icon="@drawable/donate_18xhdpi_min"
+        android:title="@string/title_donate"/>
+
+    <item
+        android:id="@+id/navigation_profile"
+        android:icon="@drawable/profile_22xhdpi_min"
+        android:title="@string/title_profile"/>
+
+    <item
+        android:id="@+id/navigation_close"
+        tools:ignore="MenuTitle" />
+
+</menu>
+

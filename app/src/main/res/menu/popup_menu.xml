@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/event"
+        android:title="@string/events"
+        />
+    <item
+        android:id="@+id/initiative"
+        android:title="@string/initiatives"
+        />
+    <item
+        android:title="@string/carecenters"
+        android:id="@+id/care"
+        />
+    <item
+        android:title="@string/raiseyourvoice"
+        android:id="@+id/raise">
+    </item>
+    <item
+        android:title="@string/volunteersignup"
+        android:id="@+id/signup">
+    </item>
+    <item
+        android:title="@string/contact"
+        android:id="@+id/contact">
+    </item>
+    <item
+        android:title="@string/about"
+        android:id="@+id/about">
+    </item>
+
+</menu>

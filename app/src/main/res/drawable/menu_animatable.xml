@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/menu_vector">
+<target
+    android:animation="@animator/menu_morph"
+    android:name="menu"></target>
+    <target
+        android:animation="@animator/rotations"
+        android:name="rotation"></target>
+</animated-vector>
