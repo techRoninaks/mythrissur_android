@@ -1,2 +1,5 @@
-<dimen name="design_bottom_navigation_text_size" tools:override="true">10sp</dimen>
-<dimen name="twelve_sp" tools:override="true">10sp</dimen>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <dimen name="design_bottom_navigation_text_size" tools:override="true">10sp</dimen>
+  <dimen name="twelve_sp" tools:override="true">10sp</dimen>
+</resources>
