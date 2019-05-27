@@ -1,0 +1,2 @@
+<dimen name="design_bottom_navigation_text_size" tools:override="true">10sp</dimen>
+<dimen name="twelve_sp" tools:override="true">10sp</dimen>
