@@ -2,6 +2,7 @@
     <string name="app_name">Mythri</string>
     <string name="app_logo_desc">MyThrissur Logo</string>
     <string name="app_logo_text_desc">MyThrissur Text Logo</string>
+    <!-- Haris Changes Sprint 2 Starts Here -->
     <string name="title_home">Home</string>
     <string name="title_donate">Donate</string>
     <string name="title_volunteer">Volunteer</string>
@@ -16,4 +17,5 @@
     <string name="contact">Contact</string>
     <string name="about">About</string>
     <string name="master_url">"http://understandable-blin.hostingerapp.com/myThrissurWeb/"</string>
+    <!-- Haris Changes Sprint 2 Starts Here -->
 </resources>
