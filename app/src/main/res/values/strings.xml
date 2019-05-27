@@ -2,4 +2,18 @@
     <string name="app_name">Mythri</string>
     <string name="app_logo_desc">MyThrissur Logo</string>
     <string name="app_logo_text_desc">MyThrissur Text Logo</string>
+    <string name="title_home">Home</string>
+    <string name="title_donate">Donate</string>
+    <string name="title_volunteer">Volunteer</string>
+    <string name="title_profile">Profile</string>
+    <string name="title_close">Close</string>
+    <string name="title_error">Cannot Connect Without Network Connection</string>
+    <string name="events">Events</string>
+    <string name="initiatives">Janananma</string>
+    <string name="carecenters">Care Centers</string>
+    <string name="raiseyourvoice">Raise Your Voice</string>
+    <string name="volunteersignup">Volunteer SignUp</string>
+    <string name="contact">Contact</string>
+    <string name="about">About</string>
+    <string name="master_url">"http://understandable-blin.hostingerapp.com/myThrissurWeb/"</string>
 </resources>
