@@ -25,7 +25,7 @@
                 <data android:host="understandable-blin.hostingerapp.com" />
             </intent-filter>
         </activity>
-        <activity android:name=".SplashScreenActivity">
+        <activity android:name=".activities.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

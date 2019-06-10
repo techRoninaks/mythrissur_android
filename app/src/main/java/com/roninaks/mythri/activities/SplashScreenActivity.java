@@ -1,4 +1,4 @@
-package com.roninaks.mythri;
+package com.roninaks.mythri.activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+
+import com.roninaks.mythri.R;
 
 public class SplashScreenActivity extends AppCompatActivity {
     View view,view1,view2,view3,view4,view5,view6,view7;

@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
@@ -74,10 +75,10 @@ public class MainActivity<drawable> extends AppCompatActivity {
         } else {
             setContentView(R.layout.activity_main);
              //custom action bar
-            this.getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-            getSupportActionBar().setDisplayShowCustomEnabled(true);
-            getSupportActionBar().setCustomView(R.layout.action_bar);
-            getSupportActionBar().setElevation(0);
+//            this.getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+//            getSupportActionBar().setDisplayShowCustomEnabled(true);
+//            getSupportActionBar().setCustomView(R.layout.action_bar);
+//            getSupportActionBar().setElevation(0);
             webView=findViewById(R.id.webview);
             imageView=(ImageView) findViewById(R.id.menuid);
             imageView.setOnClickListener(new View.OnClickListener() {
@@ -135,44 +136,6 @@ public class MainActivity<drawable> extends AppCompatActivity {
 
     }
 
-    /***
-     *This function is used for handle the incoming url
-     * @param appLinkData - This contains the link coming into the activity
-     */
-    private void handleUri(Uri appLinkData) {
-        try {
-            uriPresentFlag = true;
-            String uri = appLinkData.toString();
-            path = uri.contains("m_view") ? uri : uri.contains("?") ? (uri.contains("&") ? uri.concat("&m_view=1") : uri.concat("m_view=1")) : uri.concat("?m_view=1");
-            if (uri.contains("home.html")) {
-                navigation.setSelectedItemId(R.id.navigation_home);
-            } else if (uri.contains("cate_listing.html") && uri.contains("cat_type=donate")) {
-                navigation.setSelectedItemId(R.id.navigation_donate);
-            } else if (uri.contains("profile.html")) {
-                navigation.setSelectedItemId(R.id.navigation_profile);
-            } else if (uri.contains("cate_listing.html") && uri.contains("cat_type=volunteer")) {
-                navigation.setSelectedItemId(R.id.navigation_volunteer);
-            } else if (uri.contains("about.html")) {
-                webView.loadUrl(path);
-            } else if (uri.contains("cate_listing") && uri.contains("cat_type=janananma")) {
-                webView.loadUrl(path);
-            } else if (uri.contains("cate_listing") && uri.contains("cat_type=care_center")) {
-                webView.loadUrl(path);
-            }else if (uri.contains("cate_listing") && uri.contains("cat_type=events")) {
-                webView.loadUrl(path);
-            }else if (uri.contains("forms.html") && uri.contains("cat_type=raise_your_voice")) {
-                webView.loadUrl(path);
-            }else if (uri.contains("contact.html")) {
-                webView.loadUrl(path);
-            }else if (uri.contains("forms.html") && (uri.contains("cat_type=volunteer") || uri.contains("cat_type=register")) ) {
-                webView.loadUrl(path);
-            }
-        }catch (Exception e){
-            Toast.makeText(this,e+"Found",Toast.LENGTH_LONG).show();
-        }
-    }
-
-
     //bottom navigation
 
     BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener= new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -210,7 +173,7 @@ public class MainActivity<drawable> extends AppCompatActivity {
                     break;*/
             }
             uriPresentFlag = false;
-            webView.loadUrl(path);
+            setWebContent(path);
 //            setFragment(fragment,bundle);
             return true;
         }
@@ -257,7 +220,7 @@ public class MainActivity<drawable> extends AppCompatActivity {
      * @return
      */
 
-   public boolean isConnected(Context context){
+    public boolean isConnected(Context context){
 
             ConnectivityManager connectivityManager=(ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
             NetworkInfo networkInfo=connectivityManager.getActiveNetworkInfo();
@@ -321,7 +284,7 @@ public class MainActivity<drawable> extends AppCompatActivity {
                        path = path.concat("about.html?m_view=1");
                        break;
                }
-               webView.loadUrl(path);
+               setWebContent(path);
                return true;
            }
        });
@@ -375,5 +338,62 @@ public class MainActivity<drawable> extends AppCompatActivity {
 
     }
 
+    /***
+     *This function is used for handle the incoming url
+     * @param appLinkData - This contains the link coming into the activity
+     */
+    private void handleUri(Uri appLinkData) {
+        try {
+            uriPresentFlag = true;
+            String uri = appLinkData.toString();
+            path = uri.contains("m_view") ? uri : uri.contains("?") ? (uri.contains("&") ? uri.concat("&m_view=1") : uri.concat("m_view=1")) : uri.concat("?m_view=1");
+            if (uri.contains("home.html")) {
+                navigation.setSelectedItemId(R.id.navigation_home);
+            } else if (uri.contains("cate_listing.html") && uri.contains("cat_type=donate")) {
+                navigation.setSelectedItemId(R.id.navigation_donate);
+            } else if (uri.contains("profile.html")) {
+                navigation.setSelectedItemId(R.id.navigation_profile);
+            } else if (uri.contains("cate_listing.html") && uri.contains("cat_type=volunteer")) {
+                navigation.setSelectedItemId(R.id.navigation_volunteer);
+            } else if (uri.contains("about.html")) {
+                setWebContent(path);
+            } else if (uri.contains("cate_listing") && uri.contains("cat_type=janananma")) {
+                setWebContent(path);
+            } else if (uri.contains("cate_listing") && uri.contains("cat_type=care_center")) {
+                setWebContent(path);
+            }else if (uri.contains("cate_listing") && uri.contains("cat_type=events")) {
+                setWebContent(path);
+            }else if (uri.contains("forms.html") && uri.contains("cat_type=raise_your_voice")) {
+                setWebContent(path);
+            }else if (uri.contains("contact.html")) {
+                setWebContent(path);
+            }else if (uri.contains("forms.html") && (uri.contains("cat_type=volunteer") || uri.contains("cat_type=register")) ) {
+                setWebContent(path);
+            }
+        }catch (Exception e){
+            Toast.makeText(this,e+"Found",Toast.LENGTH_LONG).show();
+        }
+    }
 
+    private void setWebContent(String path){
+        webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(false);
+        webView.getSettings().setSupportZoom(false);
+        webView.getSettings().setSupportMultipleWindows(false);
+        webView.setHorizontalScrollBarEnabled(false);
+        webView.setVerticalScrollBarEnabled(false);
+        webView.getSettings().setUseWideViewPort(true);
+        webView.getSettings().setLoadWithOverviewMode(true);
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.setWebViewClient(new WebViewClient() {
+            public boolean shouldOverrideUrlLoading(WebView viewx, String urlx) {
+                viewx.loadUrl(urlx);
+                return false;
+            }
+        });
+        try {
+            webView.loadUrl(path);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
