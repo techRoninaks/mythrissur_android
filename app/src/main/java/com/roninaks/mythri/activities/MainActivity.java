@@ -2,6 +2,7 @@ package com.roninaks.mythri.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.drawable.AnimatedVectorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -15,6 +16,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -111,6 +113,7 @@ public class MainActivity<drawable> extends AppCompatActivity {
                     label.setLayoutParams(labelParams);
 
                 }
+
             }
 
             //handle navigation selected items
@@ -172,12 +175,14 @@ public class MainActivity<drawable> extends AppCompatActivity {
                     flag = !flag;
                     break;*/
             }
+
             uriPresentFlag = false;
             setWebContent(path);
 //            setFragment(fragment,bundle);
             return true;
         }
     };
+
 
     /**
      * add menu item animation
@@ -300,7 +305,7 @@ public class MainActivity<drawable> extends AppCompatActivity {
      * @param menuItem
      */
 
-    private void setDefaultIcon(MenuItem menuItem){
+    private void setDefaultIcon(final MenuItem menuItem){
         try {
             switch (menuItem.getItemId()){
                 case R.id.navigation_home: //Home
@@ -336,6 +341,35 @@ public class MainActivity<drawable> extends AppCompatActivity {
             Toast.makeText(this,e+"Found",Toast.LENGTH_LONG).show();
         }
 
+    }
+
+    /***
+     * Sets bottom navigation icons according to change in webview url
+     * @param url - Changed url
+     */
+    private void setPageIcon(String url) {
+        Menu menu = navigation.getMenu();
+        setDefaultIcon(prevItem);
+        if(url.contains("home.html")){
+            MenuItem item = menu.getItem(0);
+            item.setIcon(R.drawable.home_14xhdpi_min);
+            prevItem = item;
+        }else if(url.contains("profile.html")){
+            MenuItem item = menu.getItem(3);
+            item.setIcon(R.drawable.profileselected_21xhdpi_min);
+            prevItem = item;
+        }else if(url.contains("cate_listing.html")){
+            if(url.contains("cat_type=donate")){
+                MenuItem item = menu.getItem(2);
+                item.setIcon(R.drawable.donateselected_17xhdpi_min);
+                prevItem = item;
+            }
+            else if(url.contains("cat_type=volunteer")) {
+                MenuItem item = menu.getItem(1);
+                item.setIcon(R.drawable.volunteerselected_19xhdpi_min);
+                prevItem = item;
+            }
+        }
     }
 
     /***
@@ -375,6 +409,7 @@ public class MainActivity<drawable> extends AppCompatActivity {
         }
     }
 
+
     private void setWebContent(String path){
         webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(false);
         webView.getSettings().setSupportZoom(false);
@@ -395,5 +430,17 @@ public class MainActivity<drawable> extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        webView.setWebViewClient(new WebViewClient() {
+            @Override
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                super.onPageStarted(view, url, favicon);
+            }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                setPageIcon(url);
+            }
+        });
+
     }
 }
