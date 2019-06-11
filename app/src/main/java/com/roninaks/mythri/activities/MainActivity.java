@@ -2,6 +2,7 @@ package com.roninaks.mythri.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.drawable.AnimatedVectorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -15,6 +16,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,6 +57,8 @@ public class MainActivity<drawable> extends AppCompatActivity {
 
             //add custom action bar
             this.getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setHomeButtonEnabled(true);
             getSupportActionBar().setDisplayShowCustomEnabled(true);
             getSupportActionBar().setCustomView(R.layout.action_bar);
             getSupportActionBar().setElevation(0);
@@ -74,11 +78,11 @@ public class MainActivity<drawable> extends AppCompatActivity {
 
         } else {
             setContentView(R.layout.activity_main);
-             //custom action bar
-//            this.getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-//            getSupportActionBar().setDisplayShowCustomEnabled(true);
-//            getSupportActionBar().setCustomView(R.layout.action_bar);
-//            getSupportActionBar().setElevation(0);
+            //custom action bar
+            this.getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+            getSupportActionBar().setDisplayShowCustomEnabled(true);
+            getSupportActionBar().setCustomView(R.layout.action_bar);
+           getSupportActionBar().setElevation(0);
             webView=findViewById(R.id.webview);
             imageView=(ImageView) findViewById(R.id.menuid);
             imageView.setOnClickListener(new View.OnClickListener() {
@@ -111,6 +115,7 @@ public class MainActivity<drawable> extends AppCompatActivity {
                     label.setLayoutParams(labelParams);
 
                 }
+
             }
 
             //handle navigation selected items
@@ -123,14 +128,6 @@ public class MainActivity<drawable> extends AppCompatActivity {
             }else{
                 handleUri(appLinkData);
             }
-
-//            //add Home fragment
-//            String path="http://understandable-blin.hostingerapp.com/myThrissurWeb/home.html?m_view=1";
-//            bundle.putString("url",path);
-//            fragment = new Home();
-//            setFragment(fragment,bundle);
-
-
 
         }
 
@@ -172,12 +169,14 @@ public class MainActivity<drawable> extends AppCompatActivity {
                     flag = !flag;
                     break;*/
             }
+
             uriPresentFlag = false;
             setWebContent(path);
 //            setFragment(fragment,bundle);
             return true;
         }
     };
+
 
     /**
      * add menu item animation
@@ -210,7 +209,7 @@ public class MainActivity<drawable> extends AppCompatActivity {
 
             }
         }catch (Exception e){
-           Toast.makeText(this,e+"Found",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,e+"Found",Toast.LENGTH_LONG).show();
         }
     }
 
@@ -222,23 +221,23 @@ public class MainActivity<drawable> extends AppCompatActivity {
 
     public boolean isConnected(Context context){
 
-            ConnectivityManager connectivityManager=(ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
-            NetworkInfo networkInfo=connectivityManager.getActiveNetworkInfo();
+        ConnectivityManager connectivityManager=(ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo=connectivityManager.getActiveNetworkInfo();
 
-            if (networkInfo!=null && networkInfo.isConnectedOrConnecting()){
-                NetworkInfo wifi=connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-                NetworkInfo mobile=connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+        if (networkInfo!=null && networkInfo.isConnectedOrConnecting()){
+            NetworkInfo wifi=connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+            NetworkInfo mobile=connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
 
-                if ((mobile!=null && mobile.isConnectedOrConnecting()) || (wifi!=null && wifi.isConnectedOrConnecting())){
-                    return true;
-                }else {
-                    return false;
-                }
+            if ((mobile!=null && mobile.isConnectedOrConnecting()) || (wifi!=null && wifi.isConnectedOrConnecting())){
+                return true;
             }else {
                 return false;
             }
+        }else {
+            return false;
+        }
 
-   }
+    }
 
     /**
      * this function is used for showing popup menu
@@ -248,50 +247,50 @@ public class MainActivity<drawable> extends AppCompatActivity {
     public void showPopup(View v){
         try {
 
-       PopupMenu popupMenu=new PopupMenu(MainActivity.this,v);
-       popupMenu.setOnDismissListener(new PopupMenu.OnDismissListener() {
-           @Override
-           public void onDismiss(PopupMenu menu) {
-               toggle("test",flag);
-               flag = !flag;
-           }
-       });
-       popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-           @Override
-           public boolean onMenuItemClick(MenuItem item) {
-               path = master_url;
-               switch (item.getItemId()) {
-                   case R.id.event:
+            PopupMenu popupMenu=new PopupMenu(MainActivity.this,v);
+            popupMenu.setOnDismissListener(new PopupMenu.OnDismissListener() {
+                @Override
+                public void onDismiss(PopupMenu menu) {
+                    toggle("test",flag);
+                    flag = !flag;
+                }
+            });
+            popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(MenuItem item) {
+                    path = master_url;
+                    switch (item.getItemId()) {
+                        case R.id.event:
 //                       fragment=new Events();
-                       path = path.concat("cate_listing.html?cat_type=events&m_view=1");
-                       break;
-                   case R.id.initiative:
-                       path = path.concat("cate_listing.html?cat_type=janananma&m_view=1");
-                       break;
-                   case R.id.care:
-                       path = path.concat("cate_listing.html?cat_type=care_centers&m_view=1");
-                       break;
-                   case R.id.raise:
-                       path = path.concat("forms.html?cat_type=raise_your_voice&m_view=1");
-                       break;
-                   case R.id.signup:
-                       path = path.concat("profile.html?m_view=1");
-                       break;
-                   case R.id.contact:
-                       path = path.concat("contact.html?m_view=1");
-                       break;
-                   case R.id.about:
-                       path = path.concat("about.html?m_view=1");
-                       break;
-               }
-               setWebContent(path);
-               return true;
-           }
-       });
-       popupMenu.inflate(R.menu.popup_menu);
-       popupMenu.show();
-    }catch (Exception e){
-        Toast.makeText(this,e+"Found",Toast.LENGTH_LONG).show();
+                            path = path.concat("cate_listing.html?cat_type=events&m_view=1");
+                            break;
+                        case R.id.initiative:
+                            path = path.concat("cate_listing.html?cat_type=janananma&m_view=1");
+                            break;
+                        case R.id.care:
+                            path = path.concat("cate_listing.html?cat_type=care_centers&m_view=1");
+                            break;
+                        case R.id.raise:
+                            path = path.concat("forms.html?cat_type=raise_your_voice&m_view=1");
+                            break;
+                        case R.id.signup:
+                            path = path.concat("profile.html?m_view=1");
+                            break;
+                        case R.id.contact:
+                            path = path.concat("contact.html?m_view=1");
+                            break;
+                        case R.id.about:
+                            path = path.concat("about.html?m_view=1");
+                            break;
+                    }
+                    setWebContent(path);
+                    return true;
+                }
+            });
+            popupMenu.inflate(R.menu.popup_menu);
+            popupMenu.show();
+        }catch (Exception e){
+            Toast.makeText(this,e+"Found",Toast.LENGTH_LONG).show();
         }
     }
 
@@ -300,7 +299,7 @@ public class MainActivity<drawable> extends AppCompatActivity {
      * @param menuItem
      */
 
-    private void setDefaultIcon(MenuItem menuItem){
+    private void setDefaultIcon(final MenuItem menuItem){
         try {
             switch (menuItem.getItemId()){
                 case R.id.navigation_home: //Home
@@ -336,6 +335,35 @@ public class MainActivity<drawable> extends AppCompatActivity {
             Toast.makeText(this,e+"Found",Toast.LENGTH_LONG).show();
         }
 
+    }
+
+    /***
+     * Sets bottom navigation icons according to change in webview url
+     * @param url - Changed url
+     */
+    private void setPageIcon(String url) {
+        Menu menu = navigation.getMenu();
+        setDefaultIcon(prevItem);
+        if(url.contains("home.html")){
+            MenuItem item = menu.getItem(0);
+            item.setIcon(R.drawable.home_14xhdpi_min);
+            prevItem = item;
+        }else if(url.contains("profile.html")){
+            MenuItem item = menu.getItem(3);
+            item.setIcon(R.drawable.profileselected_21xhdpi_min);
+            prevItem = item;
+        }else if(url.contains("cate_listing.html")){
+            if(url.contains("cat_type=donate")){
+                MenuItem item = menu.getItem(2);
+                item.setIcon(R.drawable.donateselected_17xhdpi_min);
+                prevItem = item;
+            }
+            else if(url.contains("cat_type=volunteer")) {
+                MenuItem item = menu.getItem(1);
+                item.setIcon(R.drawable.volunteerselected_19xhdpi_min);
+                prevItem = item;
+            }
+        }
     }
 
     /***
@@ -375,6 +403,7 @@ public class MainActivity<drawable> extends AppCompatActivity {
         }
     }
 
+
     private void setWebContent(String path){
         webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(false);
         webView.getSettings().setSupportZoom(false);
@@ -395,5 +424,16 @@ public class MainActivity<drawable> extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        webView.setWebViewClient(new WebViewClient() {
+            @Override
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                super.onPageStarted(view, url, favicon);
+            }
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                setPageIcon(url);
+            }
+        });
+
     }
 }
