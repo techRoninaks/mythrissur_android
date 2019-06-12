@@ -56,6 +56,7 @@ public class MainActivity<drawable> extends AppCompatActivity {
             setContentView(R.layout.activity_error);
 
             //add custom action bar
+
             this.getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setHomeButtonEnabled(true);

@@ -1,31 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/refreshlayout"
     android:orientation="vertical"
+    android:layout_gravity="center"
     tools:context=".activities.ErrorActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:src="@drawable/nointernet"/>
 
     <Button
         android:id="@+id/refresh"
-        android:layout_gravity="center_vertical"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:text="Reload"
-        android:layout_marginLeft="125dp"
-        android:layout_marginTop="250dp"
-        tools:ignore="MissingConstraints" />
-
-    <android.support.v7.widget.AppCompatTextView
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_marginTop="20dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_below="@id/refreshlayout"
-        android:layout_above="@id/refresh"
-        android:text="@string/title_error"
-        android:textSize="12sp" />
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/t1"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="-89dp"
+        android:gravity="center"
+        android:text="Retry" />
 
-</LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:id="@+id/t1"
+        android:layout_height="wrap_content"
+        android:text="Unable to connect to the internet"
+        android:textSize="20sp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"/>
+
+
+</RelativeLayout>
